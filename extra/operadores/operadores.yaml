@@ -1,0 +1,108 @@
+- desc: Constructor
+  name: init
+  exam: NombreTipo(args)
+- desc: Representación textual
+  name: repr
+  exam: repr(o1)
+  defs: "\"<tipo at memoria>\""
+  nota: Lo que sale en la consola de Python al mostrar un objeto.
+- desc: Suma
+  name: add
+  exam: o1 + o2
+- desc: Producto
+  name: mul
+  exam: o1 * o2
+- desc: Resta
+  name: sub
+  exam: o1 - o2
+- desc: Opuesto
+  name: neg
+  exam: -o1
+- desc: División
+  name: truediv
+  exam: o1 / o2
+- desc: División entera
+  name: floordiv
+  exam: o1 // o2
+- desc: Potencia
+  name: pow
+  exam: o1 ** o2
+- desc: Suma in situ
+  name: iadd
+  exam: o1 += o2
+  defs: o1 = o1 + o2
+  nota: Todos los operadores aritméticos tienen una variante con prefijo \texttt{i} para operar in situ.
+- desc: Producto por la derecha
+  name: rmul
+  exam: o2 * o1
+  nota: Solo si \texttt{arg} no tiene definido el operador. Existe para todos los operadores aritméticos.
+- desc: Comparación de igualdad
+  name: eq
+  exam: o1 == o2
+  defs: id(o1) == id(o2)
+- desc: Comparación de orden estricto
+  name: lt
+  exam: o1 < o2
+- desc: Comparación de orden
+  name: le
+  exam: o1 <= o2
+- desc: Comparación de orden estricto
+  name: gt
+  exam: o1 > o2
+  defs: o2 < o1
+- desc: Conversión a booleano
+  name: bool
+  exam: bool(o1)
+  defs: "True"
+- desc: Conversión a entero
+  name: int
+  exam: int(o1)
+- desc: Conversión a coma flotante
+  name: float
+  exam: float(o1)
+- desc: Conversión a texto
+  name: str
+  exam: str(o1)
+  defs: repr(o1)
+- desc: Longitud o tamaño
+  name: len
+  exam: len(o1)
+- desc: Acceso con corchete
+  name: getitem
+  exam: o1[o2]
+- desc: Asignación con corchete
+  name: setitem
+  exam: o1[o2] = arg2
+- desc: Eliminación con corchete
+  name: delitem
+  exam: del o1[o2]
+- desc: Inclusión
+  name: contains
+  exam: o2 in o1
+- desc: Llamada como si fuera función
+  name: call
+  exam: o1(args)
+- desc: Iterador de un iterable
+  name: iter
+  exam: iter(o1)
+- desc: Iterador inverso
+  name: reversed
+  exam: reversed(o1)
+- desc: Siguiente de un iterador
+  name: next
+  exam: next(o1)
+- desc: Unión/disyunción
+  name: or
+  exam: o1 | o2
+- desc: Intersección/conjunción
+  name: and
+  exam: o1 & o2
+- desc: Función resumen
+  name: hash
+  exam: hash(o1)
+  defs: "id(o1) // 16"
+  nota: Necesario para objetos que quieran usarse como claves de diccionario o en conjuntos. El valor por defecto depende de la implementación.
+- desc: Destructor
+  name: del
+  exam: ""
+  nota: Se llama cuando el objeto es eliminado por el recolector de basura.

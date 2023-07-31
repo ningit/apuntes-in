@@ -1,0 +1,15 @@
+# Archivos auxiliares y temporales de los apuntes
+apuntes/pdf
+apuntes/.cache
+
+# Archivos auxiliares y generados de LaTeX
+*.pdf
+*.aux
+*.log
+*.nav
+*.aut
+*.out
+*.snm
+*.toc
+*.vrb
+_minted-*

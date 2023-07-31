@@ -1,0 +1,88 @@
+%
+% Ejemplo detallado de ejecución de una función recursiva: el factorial
+% (compilar con xelatex -8bit -shell-escape)
+%
+% Rubén Rubio (Universidad Complutense de Madrid) 2023
+%
+
+\documentclass[aspectratio=169]{beamer}
+
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{fontspec}
+\setmainfont{Source Sans 3}
+\setsansfont{Source Sans 3}
+\setmonofont{Inconsolata}
+\usepackage{unicode-math}
+\setmathfont{Fira Math}
+
+\usepackage{tikz}
+\usepackage{minted}
+\usepackage{colortbl}
+
+\setminted{tabsize=3, highlightcolor=yellow!60, linenos}
+
+\begin{document}
+
+\begin{frame}[fragile]{Ejecución detallada del factorial recursivo}
+% Selecciona la línea que se resalta del código
+\only<1,12>    {\setminted{highlightlines={7}}}
+\only<2,4,6>   {\setminted{highlightlines={2}}}
+\only<3,5,8-11>{\setminted{highlightlines={5}}}
+\only<7>       {\setminted{highlightlines={3}}}
+
+\begin{minted}[]{python}
+def factorial(n):
+	if n == 0:
+		return 1
+	else:
+		return n * factorial(n - 1)
+
+factorial(2)
+\end{minted}
+
+\begin{tikzpicture}[overlay]
+\fill[white] (7, 0) rectangle (14.2, 4);
+\node<2,3,10,11>[font=\small, fill=green!40, rounded corners=2pt] at (4, 3.6) {$n = 2$};
+\node<4,5,8,9>[font=\small, fill=green!40, rounded corners=2pt] at (4, 3.6) {$n = 1$};
+\node<6,7>[font=\small, fill=green!40, rounded corners=2pt] at (4, 3.6) {$n = 0$};
+\node<9,11>[font=\small, fill=green!40, rounded corners=2pt, text width=3cm, align=center] at (4.8, 1.63) {$1$};
+\node<12>[font=\small, fill=green!40, rounded corners=2pt] at (3, .675) {$= 2$};
+\node[anchor=north west, fill=white, text width=4cm] at (8.5, 4) {
+\textbf{Pila de llamadas}
+\vspace{.6ex}
+\only<1,11>{\vspace{-2.2pt}}
+
+% Pila de llamadas
+\begin{tabular}{|l|p{2cm}|p{1.5cm}|} \hline
+\# & Variables & Retorno%
+\only<2-9>{\\ \hline 1 & $n = 2$ & línea 7}%
+\only<10,11>{\\ \hline 1 & $n = 2$ & \cellcolor{yellow!60} línea 7}%
+\only<4-7>{\\ \hline 2 & $n = 1$ & línea 5}%
+\only<8,9>{\\ \hline 2 & $n = 1$ & \cellcolor{yellow!60} línea 5}%
+\only<6>{\\ \hline 3 & $n = 0$ & línea 5}%
+\only<7>{\\ \hline 3 & $n = 0$ & \cellcolor{yellow!60} línea 5}%
+\\ \hline%
+\end{tabular}};
+
+% Mensajes explicativos de cada pantalla
+\node[color=teal, text width=.9\linewidth, align=center] at (.5\linewidth, -1.5) {\itshape%
+\only<1>{Se ejecuta la llamada \texttt{factorial(2)}}%
+\only<2>{Se reserva espacio en la pila de llamadas para la nueva variable n y se guarda el punto (línea 7) al que volver cuando acabe la llamada}%
+\only<3>{Se necesita el valor de \texttt{factorial(n-1)}, así que dejamos la evaluación de la línea 5 pendiente y llamamos de nuevo a \texttt{factorial} con $n - 1 = 1$}%
+\only<4>{En la pila queda registrado que \texttt{factorial(2)} está pendiente y tendremos que volver a él}%
+\only<5>{Se repite ahora la misma historia, necesitamos obtener el \texttt{factorial} para $n \!-\! 1 \!\!=\!\! 0$ para calcular la expresión de la línea 5}%
+\only<6>{Hemos llegado por fin al caso base, y \\ se ejecuta ahora la primera rama del condicional}%
+\only<7>{Como hemos llegado a un \texttt{return}, termina esta llamada y  \\ volvemos al punto de retorno registrado en la pila devolviendo 1}%
+\only<8,9>{Ya tenemos el valor de \texttt{factorial(0)} y podemos resolver el producto, \\ \texttt{factorial(1) = 1} y volvemos a la siguiente llamada en la pila}%
+\only<10,11>{Se repite el mismo proceso, termina \texttt{factorial(2)} y volvemos a donde se hizo la llamada inicial}%
+\only<12>{Finalmente hemos obtenido que el resultado es 2}%
+};
+\end{tikzpicture}
+
+% Avanza el número de diapositiva
+% (como todo es un overlay sobre la misma saldría siempre 1)
+\only<2->{\stepcounter{framenumber}}
+\end{frame}
+
+\end{document}
